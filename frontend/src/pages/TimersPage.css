@@ -1,0 +1,162 @@
+/*
+  Modified by: Alan Espana
+  CS 232 - Capstone II
+  Final Project App - Tally Down
+  Last updated: 5/30/2024
+*/
+
+.timerHeader {
+    text-align: center;
+    margin-left: 30px;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    /* Google font */
+    font-family: "Carter One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: #292929;
+}
+
+.downArrow {
+    padding-left: 8px;
+    width: 42px;
+    transform: translateY(1px);
+}
+
+.inputTimer, .inputTitle {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-right: 0px;
+}
+
+.inputDescription {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-right: 8px;
+}
+
+.inputHours, .inputMinutes {
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.timerList {
+    margin-top: 20px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 0px;
+    border-bottom: 6px solid #2b76e0;
+    border-top: 6px solid #2b76e0;
+    border-radius: 6px;
+    background-color: #454545;
+    padding-bottom: 10px;
+}
+
+.timerHeaderRow {
+    display: grid;
+    grid-template-columns: 2fr 3fr 4fr 2fr;
+    background-color: #292929; 
+    padding: 11px;
+    font-weight: bold;
+    color: white;
+}
+
+.quickTimerHeader {
+    margin-top: 10px;
+}
+
+.quickTimerText {
+    margin-left: 15px;
+    font-size: 18px;
+    /* Google font */
+    font-family: "Carter One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: #292929;
+}
+
+.quickTimerButton {
+    margin-left: 10px;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 14px;
+}
+
+.timerHeaderCell {
+    text-align: left;
+    padding: 0 11px;
+}
+
+.timerHeaderCell:last-child {
+    border-right: none; /* Removes right border from the last cell */
+}
+
+.timerItem {
+    display: grid;
+    grid-template-columns: 2fr 3fr 4fr 2fr;
+    padding: 0 11px;
+    align-items: center;
+    background-color: #0761a6;
+    color: white;
+}
+
+.timerItem:nth-child(even) {
+    background-color: #6b6b6b;
+}
+
+.timerCell {
+    padding: 6px;
+    height: auto;
+    vertical-align: top;
+    margin-left: 0px;
+    margin-right: 10px;
+    border-right: 3px solid #FCC200;
+}
+
+.timerCell:last-child {
+    border-right: none; /* Removes right border from the last cell */
+}
+
+.timer {
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.timerTitle {
+    white-space: normal;
+    word-wrap: break-word;
+    margin-left: 0%;
+    max-width: 440px; /* Set the maximum width for wrapping */
+}
+
+.timerDescription {
+    white-space: normal;
+    margin-left: 0%;
+    word-wrap: break-word;
+    max-width: 800px; /* Set the maximum width for wrapping */
+}
+
+.timerActions {
+    display: flex;
+    gap: 22px;
+    margin-right: 4px;
+    justify-content: flex-end;
+}
+
+.popupMessage {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    text-align: center;
+}

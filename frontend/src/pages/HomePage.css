@@ -1,0 +1,95 @@
+/*
+  Modified by: Alan Espana
+  CS 232 - Capstone II
+  Final Project App - Tally Down
+  Last updated: 5/23/2024
+*/
+
+.homeTitle {
+    text-align: center;
+    margin-top: 20px;
+    /* Google font */
+    font-family: "Carter One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: #292929;
+}
+
+.homeTimers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.homeList {
+    width: 100%;
+    max-width: 1230px;
+}
+
+.homeTimerRow {
+    display: grid;
+    grid-template-columns: 2fr 2fr 3fr .4fr;
+    background-color: #e0e0e0;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.homeHeaderCell {
+    text-align: left;
+    padding: 0 10px;
+}
+
+.homeTimerItem {
+    display: grid;
+    grid-template-columns: 2fr 2fr 3fr .4fr;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.homeCellTimer, .homeCellTitle, .homeCellEndDate, .homeCellDelete {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.homeCellTitle, .homeCellEndDate, .homeCellDelete {
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.countdown-item {
+    color: #111;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-text span {
+    margin: 0 5px;
+}
+
+.countdown-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+}

@@ -1,0 +1,83 @@
+/*
+  Modified by: Alan Espana
+  CS 232 - Capstone II
+  Final Project App - Tally Down
+  Last updated: 5/29/2024
+*/
+
+/* Fonts */
+/* Header content - https://fonts.google.com/ */
+
+/* Not being used */
+.jersey-25-charted-regular {
+  font-family: "Jersey 25 Charted", sans-serif;
+  font-weight: 400;
+  font-size: 50px;
+  font-style: normal;
+}
+
+.jaro-Title {
+  font-family: "Jaro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 50px;
+  font-style: normal;
+  color: #292929;
+}
+
+.jaro-Title .T {
+  color: #0761a6; /* Set the letter T to blue */
+}
+
+.jaro-Title .D {
+  color: #FCC200; /* Set the letter D to yellow */
+}
+
+/* End of fonts */
+
+.header {
+  background-color: white;
+  padding: 10px;
+  align-items: center;
+}
+
+.header-content {
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 4px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  margin: 10px 0px 0px 0px;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+}
+
+.nav-item {
+  margin-right: 10px;
+}
+
+.nav-item.left {
+  margin-right: auto;
+}
+
+.nav-item.right {
+  margin-left: 4%;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.animatedTimer {
+  width: 58px; 
+  transform: translateY(11px);
+}
