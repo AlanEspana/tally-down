@@ -24,6 +24,8 @@ export default function AddTimer() {
         return savedTimers ? JSON.parse(savedTimers) : [];
     });
     const [popupVisible, setPopupVisible] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [finishedTimerIds, setFinishedTimerIds] = useState(new Set());
     const hoursRef = useRef(null);
 
     const saveTimersToLocalStorage = (timers) => {
@@ -98,12 +100,13 @@ export default function AddTimer() {
                     if (remaining > 0) {
                         return { ...timer, remaining, lastUpdated: Date.now() };
                     } else {
-                        if (!popupVisible) {
+                        if (!popupVisible && !finishedTimerIds.has(timer.id)) {
+                            setPopupMessage('Timer is done!');
                             setPopupVisible(true);
+                            setFinishedTimerIds(prevIds => new Set(prevIds).add(timer.id));
                             setTimeout(() => {
-                                setPopupVisible(false);
                                 handleDeleteTimer(timer.id);
-                            }, 8000);
+                            }, 5000);
                         }
                         return { ...timer, remaining: 0, lastUpdated: Date.now() };
                     }
@@ -114,7 +117,7 @@ export default function AddTimer() {
         }, 1000);
 
         return () => clearInterval(intervalId);
-    }, [timers, popupVisible]);
+    }, [timers, popupVisible, finishedTimerIds]);
 
     useEffect(() => {
         const now = Date.now();
@@ -128,6 +131,10 @@ export default function AddTimer() {
             return updatedTimers;
         });
     }, []);
+
+    const handleClosePopup = () => {
+        setPopupVisible(false);
+    };
 
     return (
         <>
@@ -205,7 +212,8 @@ export default function AddTimer() {
                 </div>
                 {popupVisible && (
                     <div className="popupMessage">
-                        Timer is done!
+                        {popupMessage}
+                        <button onClick={handleClosePopup}>OK</button>
                     </div>
                 )}
             </div>

@@ -21,7 +21,7 @@ export default function AppHeader() {
       <nav>
         <ul className='nav-list'>
           <li className='nav-item left'>
-            <Link to="/add-timer">Add Timer</Link>
+            <Link to="/add-timer">Add a Timer</Link>
           </li>
           <li className='nav-item right'>
             <Link to="/">Home</Link>

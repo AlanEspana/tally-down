@@ -4,6 +4,7 @@
   Final Project App - Tally Down
   Last updated: 5/23/2024
 */
+// File connects to MySQL
 
 const mysql = require('mysql2');
 require('dotenv').config(); // Loads environment variables from a .env file into process.env.

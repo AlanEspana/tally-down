@@ -5,7 +5,7 @@
   Last updated: 5/23/2024
 */
 
-/* Used to manually set up the database schema when a new database instance is created */
+/* Used to manually set up the database schema when a future database instance is created */
 
 CREATE DATABASE mydatabase;
 USE mydatabase;

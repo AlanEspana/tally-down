@@ -13,6 +13,9 @@ import { calculateEndDate, saveTimersToLocalStorage, getTimersFromLocalStorage }
 
 export default function Home() {
     const [timers, setTimers] = useState(getTimersFromLocalStorage);
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [finishedTimerIds, setFinishedTimerIds] = useState(new Set()); // NEW
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -23,6 +26,14 @@ export default function Home() {
                     if (remaining > 0) {
                         return { ...timer, remaining, lastUpdated: Date.now() };
                     } else {
+                        if (!popupVisible && !finishedTimerIds.has(timer.id)) { // UPDATED
+                            setPopupMessage('Timer done! Add another one on the "Add a Timer" page');
+                            setPopupVisible(true);
+                            setFinishedTimerIds(prevIds => new Set(prevIds).add(timer.id)); // NEW
+                            setTimeout(() => {
+                                handleDeleteTimer(timer.id);
+                            }, 5000);
+                        }
                         return { ...timer, remaining: 0, lastUpdated: Date.now() };
                     }
                 });
@@ -32,12 +43,16 @@ export default function Home() {
         }, 1000);
 
         return () => clearInterval(intervalId);
-    }, []);
+    }, [timers, popupVisible, finishedTimerIds]); // UPDATED
 
     const handleDeleteTimer = (id) => {
         const updatedTimers = timers.filter(timer => timer.id !== id);
         setTimers(updatedTimers);
         saveTimersToLocalStorage(updatedTimers);
+    };
+
+    const handleClosePopup = () => {
+        setPopupVisible(false);
     };
 
     const calculateRadius = (remaining, total) => {
@@ -88,16 +103,22 @@ export default function Home() {
                     ))}
                 </div>
             </div>
+            {popupVisible && (
+                <div className="popupMessage">
+                    {popupMessage}
+                    <button onClick={handleClosePopup}>OK</button>
+                </div>
+            )}
             <AppFooter />
         </>
     );
 }
 
-// Cricle functions-
+// Circle functions-
 // https://codepen.io/FlorinPop17/pen/YbpwyG
 // https://stackoverflow.com/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-    var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+    var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
     return {
         x: centerX + (radius * Math.cos(angleInRadians)),
@@ -105,16 +126,16 @@ function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     };
 }
 
-function describeArc(x, y, radius, startAngle, endAngle){
+function describeArc(x, y, radius, startAngle, endAngle) {
     var start = polarToCartesian(x, y, radius, endAngle);
     var end = polarToCartesian(x, y, radius, startAngle);
 
     var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
 
     var d = [
-        "M", start.x, start.y, 
+        "M", start.x, start.y,
         "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
     ].join(" ");
 
-    return d;       
+    return d;
 }
