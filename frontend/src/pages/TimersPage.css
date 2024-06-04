@@ -2,7 +2,7 @@
   Modified by: Alan Espana
   CS 232 - Capstone II
   Final Project App - Tally Down
-  Last updated: 5/30/2024
+  Last updated: 6/3/2024
 */
 
 .timerHeader {
@@ -16,6 +16,10 @@
     font-weight: 400;
     font-style: normal;
     color: #292929;
+}
+
+.timerBody {
+    margin-top: 30px;
 }
 
 .downArrow {
@@ -96,7 +100,7 @@
 
 .timerItem {
     display: grid;
-    grid-template-columns: 2fr 3fr 4fr 2fr;
+    grid-template-columns: 2fr 3fr 4fr 2.2fr;
     padding: 0 11px;
     align-items: center;
     background-color: #0761a6;
@@ -163,6 +167,7 @@
 
 .popupMessage button {
     margin-top: 10px;
+    margin-left: 5px;
     padding: 5px 10px;
     border: none;
     border-radius: 3px;

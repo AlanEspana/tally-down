@@ -2,7 +2,7 @@
   Modified by: Alan Espana
   CS 232 - Capstone II
   Final Project App - Tally Down
-  Last updated: 5/30/2024
+  Last updated: 6/4/2024
 */
 
 import React, { useEffect, useState } from 'react';
@@ -15,7 +15,7 @@ export default function Home() {
     const [timers, setTimers] = useState(getTimersFromLocalStorage);
     const [popupVisible, setPopupVisible] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
-    const [finishedTimerIds, setFinishedTimerIds] = useState(new Set()); // NEW
+    const [finishedTimerIds, setFinishedTimerIds] = useState(new Set());
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -26,10 +26,10 @@ export default function Home() {
                     if (remaining > 0) {
                         return { ...timer, remaining, lastUpdated: Date.now() };
                     } else {
-                        if (!popupVisible && !finishedTimerIds.has(timer.id)) { // UPDATED
+                        if (!popupVisible && !finishedTimerIds.has(timer.id)) {
                             setPopupMessage('Timer done! Add another one on the "Add a Timer" page');
                             setPopupVisible(true);
-                            setFinishedTimerIds(prevIds => new Set(prevIds).add(timer.id)); // NEW
+                            setFinishedTimerIds(prevIds => new Set(prevIds).add(timer.id));
                             setTimeout(() => {
                                 handleDeleteTimer(timer.id);
                             }, 5000);
@@ -43,7 +43,7 @@ export default function Home() {
         }, 1000);
 
         return () => clearInterval(intervalId);
-    }, [timers, popupVisible, finishedTimerIds]); // UPDATED
+    }, [timers, popupVisible, finishedTimerIds,]);
 
     const handleDeleteTimer = (id) => {
         const updatedTimers = timers.filter(timer => timer.id !== id);
@@ -61,7 +61,7 @@ export default function Home() {
 
     const SVGCircle = ({ radius }) => (
         <svg className='countdown-svg'>
-            <path fill="none" stroke="#333" strokeWidth="4" d={describeArc(100, 100, 98, 0, radius)}/>
+            <path fill="none" stroke="#0761a6" strokeWidth="4" d={describeArc(100, 100, 98, 0, radius)}/>
         </svg>
     );
 
@@ -81,7 +81,7 @@ export default function Home() {
                         <div key={timer.id} className="homeTimerItem">
                             <div className="homeCellTimer">
                                 <div className="countdown-item">
-                                    <SVGCircle radius={calculateRadius(timer.remaining, timer.duration)} />
+                                    <SVGCircle className='svgCircle' radius={calculateRadius(timer.remaining, timer.duration)} />
                                     <div className="timer-text">
                                         <span>{Math.floor(timer.remaining / (3600 * 24))}d</span>
                                         <span>{Math.floor((timer.remaining % (3600 * 24)) / 3600)}h</span>

@@ -2,7 +2,7 @@
   Modified by: Alan Espana
   CS 232 - Capstone II
   Final Project App - Tally Down
-  Last updated: 5/29/2024
+  Last updated: 6/3/2024
 */
 
 import AppHeader from '../components/Header';
@@ -26,7 +26,13 @@ export default function AddTimer() {
     const [popupVisible, setPopupVisible] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [finishedTimerIds, setFinishedTimerIds] = useState(new Set());
+    const [editingTitle, setEditingTitle] = useState(null);
+    const [editingDescription, setEditingDescription] = useState(null);
+    const [newTitle, setNewTitle] = useState('');
+    const [newDescription, setNewDescription] = useState('');
     const hoursRef = useRef(null);
+    const titleInputRef = useRef(null);
+    const descriptionInputRef = useRef(null);
 
     const saveTimersToLocalStorage = (timers) => {
         localStorage.setItem('timers', JSON.stringify(timers));
@@ -38,7 +44,7 @@ export default function AddTimer() {
             (parseInt(minutesInput, 10) || 0) * 60 +
             (parseInt(secondsInput, 10) || 0);
 
-        if (totalSeconds && titleInput && descriptionInput) {
+        if (totalSeconds > 0 && titleInput) {
             const newTimer = {
                 id: Date.now(),
                 duration: totalSeconds,
@@ -55,6 +61,9 @@ export default function AddTimer() {
             setSecondsInput('');
             setTitleInput('');
             setDescriptionInput('');
+        } else {
+            setPopupMessage('Please enter a valid amount of time and a title.');
+            setPopupVisible(true);
         }
     };
 
@@ -88,6 +97,36 @@ export default function AddTimer() {
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             handleAddTimer();
+        }
+    };
+
+    const handleEditTitle = (id) => {
+        const updatedTimers = timers.map(timer => 
+            timer.id === id ? { ...timer, title: newTitle } : timer
+        );
+        setTimers(updatedTimers);
+        saveTimersToLocalStorage(updatedTimers);
+        setEditingTitle(null);
+        setNewTitle('');
+    };
+
+    const handleEditDescription = (id) => {
+        const updatedTimers = timers.map(timer => 
+            timer.id === id ? { ...timer, description: newDescription } : timer
+        );
+        setTimers(updatedTimers);
+        saveTimersToLocalStorage(updatedTimers);
+        setEditingDescription(null);
+        setNewDescription('');
+    };
+
+    const handleEditKeyPress = (e, id, type) => {
+        if (e.key === 'Enter') {
+            if (type === 'title') {
+                handleEditTitle(id);
+            } else if (type === 'description') {
+                handleEditDescription(id);
+            }
         }
     };
 
@@ -139,26 +178,26 @@ export default function AddTimer() {
     return (
         <>
             <AppHeader />
-            <h2 className="timerHeader">Add your special timers here <img src={downarrowcircle} alt="Down Arrow" className="downArrow" /></h2>
-            <div>
+            <h2 className='timerHeader'>Add your special timers here <img src={downarrowcircle} alt="Down Arrow" className="downArrow" /></h2>
+            <div className='timerBody'>
                 <input
                     ref={hoursRef}
                     className='inputHours'
-                    placeholder='Input time in hours'
+                    placeholder='Input Time in Hours'
                     value={hoursInput}
                     onChange={(e) => setHoursInput(e.target.value)}
                     onKeyPress={handleKeyPress}
                 />
                 <input
                     className='inputMinutes'
-                    placeholder='Input time in minutes'
+                    placeholder='Input Time in Minutes'
                     value={minutesInput}
                     onChange={(e) => setMinutesInput(e.target.value)}
                     onKeyPress={handleKeyPress}
                 />
                 <input
                     className='inputSeconds'
-                    placeholder='Input time in seconds'
+                    placeholder='Input Time in Seconds'
                     value={secondsInput}
                     onChange={(e) => setSecondsInput(e.target.value)}
                     onKeyPress={handleKeyPress}
@@ -172,7 +211,7 @@ export default function AddTimer() {
                 />
                 <input
                     className='inputDescription'
-                    placeholder='Input a description'
+                    placeholder='Input a Description'
                     value={descriptionInput}
                     onChange={(e) => setDescriptionInput(e.target.value)}
                     onKeyPress={handleKeyPress}
@@ -198,12 +237,38 @@ export default function AddTimer() {
                                 {Math.floor(timer.remaining / (3600 * 24))}d : {Math.floor((timer.remaining % (3600 * 24)) / 3600)}h : {Math.floor((timer.remaining % 3600) / 60)}m : {timer.remaining % 60}s
                             </div>
                             <div className="timerCell timerTitle">
-                                {timer.title}
+                                {editingTitle === timer.id ? (
+                                    <input 
+                                        ref={titleInputRef}
+                                        type="text" 
+                                        value={newTitle} 
+                                        onChange={(e) => setNewTitle(e.target.value)} 
+                                        onBlur={() => handleEditTitle(timer.id)}
+                                        onKeyPress={(e) => handleEditKeyPress(e, timer.id, 'title')}
+                                        autoFocus
+                                    />
+                                ) : (
+                                    timer.title
+                                )}
                             </div>
                             <div className="timerCell timerDescription">
-                                {timer.description}
+                                {editingDescription === timer.id ? (
+                                    <input 
+                                        ref={descriptionInputRef}
+                                        type="text" 
+                                        value={newDescription} 
+                                        onChange={(e) => setNewDescription(e.target.value)} 
+                                        onBlur={() => handleEditDescription(timer.id)}
+                                        onKeyPress={(e) => handleEditKeyPress(e, timer.id, 'description')}
+                                        autoFocus
+                                    />
+                                ) : (
+                                    timer.description
+                                )}
                             </div>
                             <div className="timerCell timerActions">
+                                <button onClick={() => {setEditingTitle(timer.id); setNewTitle(timer.title);}}>Edit Title</button>
+                                <button onClick={() => {setEditingDescription(timer.id); setNewDescription(timer.description);}}>Edit Description</button>
                                 <button onClick={() => handleResetTimer(timer.id)}>Reset</button>
                                 <button onClick={() => handleDeleteTimer(timer.id)}>Delete</button>
                             </div>

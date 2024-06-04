@@ -2,7 +2,7 @@
   Modified by: Alan Espana
   CS 232 - Capstone II
   Final Project App - Tally Down
-  Last updated: 5/23/2024
+  Last updated: 6/4/2024
 */
 
 .homeTitle {
@@ -30,7 +30,7 @@
 .homeTimerRow {
     display: grid;
     grid-template-columns: 2fr 2fr 3fr .4fr;
-    background-color: #e0e0e0;
+    background-color: #bbbbbb;
     padding: 10px;
     font-weight: bold;
     border-bottom: 2px solid #ddd;
@@ -39,6 +39,13 @@
 .homeHeaderCell {
     text-align: left;
     padding: 0 10px;
+    color: #292929;
+    /* Google font */
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-weight: bolder;
 }
 
 .homeTimerItem {
@@ -47,6 +54,11 @@
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid black;
+    /* Google font */
+    font-family: "Carter One", system-ui;
+    font-weight: 200;
+    font-style: normal;
+    color: #292929;
 }
 
 .homeCellTimer, .homeCellTitle, .homeCellEndDate, .homeCellDelete {
@@ -60,8 +72,15 @@
 }
 
 .countdown-item {
-    color: #111;
-    font-size: 20px;
+    /* Google Font */
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+
+    color: #454545;
+    font-size: 18px;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,6 +129,7 @@
 
 .popupMessage button {
     margin-top: 10px;
+    margin-left: 5px;
     padding: 5px 10px;
     border: none;
     border-radius: 3px;
