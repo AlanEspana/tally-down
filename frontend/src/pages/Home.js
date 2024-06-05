@@ -7,7 +7,7 @@
 
 // HomeTimer https://undraw.co/search
 // Google Fonts https://fonts.google.com/selection
-// Javascript https://chat.openai.com/chat
+// Javascript help https://chat.openai.com/chat
 // homeTimer image https://undraw.co/illustrations 
 
 import React, { useEffect, useState } from 'react';

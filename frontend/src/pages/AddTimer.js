@@ -4,7 +4,7 @@
   Final Project App - Tally Down
   Last updated: 6/5/2024
 */
-// Javascript https://chat.openai.com/chat
+// Javascript help https://chat.openai.com/chat
 
 import AppHeader from '../components/Header';
 import AppFooter from '../components/Footer';
@@ -95,6 +95,7 @@ export default function AddTimer() {
     };
 
     // Resets a timer
+    // Focuses on Hours input
     const handleResetTimer = (id) => {
         handleDeleteTimer(id);
         setHoursInput('');
