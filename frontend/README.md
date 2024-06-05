@@ -1,3 +1,53 @@
+# Modified by: Alan Espana
+# CS 232 - Capstone II
+# Final Project App - Tally Down
+
+Tally-Down User’s Manual: 
+App Dependencies: 
+(Apps required to run this project) 
+Visual Studios Code: https://code.visualstudio.com/download  
+Node.js (includes npm): (recommended link) https://nodejs.org/en/ or 
+https://nodejs.org/en/download/prebuilt-installer 
+MySQL: https://dev.mysql.com/downloads/mysql/  
+Initialization instructions: 
+1. Download the app: 
+    a. Download the app from https://github.com/AlanEspana/tally-down  
+    b. Extract the ZIP file if necessary. 
+2. Open the project: 
+    a. Open Visual Studios Code. 
+    b. Open the ‘tally-down-main’ folder inside VS Code. 
+3. Set up the Backend: 
+    a. Open a new terminal at the top of VS Code. 
+    b. Switch to the backend directory by typing ‘cd backend’ inside the terminal. 
+    c. Install back-end dependencies by typing ‘npm install’ inside the terminal. 
+    d. Start the back-end development server by typing ‘npm start’ inside the 
+    terminal. 
+    e. Leave it open while running app. 
+4. Set up the Frontend: 
+    a. Open a new terminal again while leaving the last one open. 
+    b. Install front-end dependencies by typing ‘npm install’ inside the terminal. 
+    c. Start the front-end development server with ‘npm start’ inside the terminal 
+    which will open the application. 
+5. Last Step (if needed): 
+    a. Set up the database with MySQL command line (currently the application 
+    has an empty password): 
+        i. CREATE DATABASE mydatabase; 
+        ii. CREATE USER 'root'@'localhost' IDENTIFIED BY 'your_password'; 
+        iii. GRANT ALL PRIVILEGES ON mydatabase.* TO 'root'@'localhost'; 
+        iv. FLUSH PRIVILEGES; 
+    b. Make sure the .env file in the backend is configured with your MySQL 
+    database details. It is currently: 
+        i. DB_HOST=localhost 
+        ii. DB_USER=root 
+        iii. DB_PASSWORD= 
+        iv. DB_NAME=mydatabase 
+6. Troubleshooting:  
+    a. Errors with MySQL connection: 
+        i. Ensure MySQL server is running. 
+        ii. Verify the credentials of the ‘.env’ file. 
+        iii. Check the error messages in the backend terminal.
+
+# DEFAULT README BEGINS HERE-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

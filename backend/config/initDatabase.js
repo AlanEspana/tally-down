@@ -4,9 +4,11 @@
   Final Project App - Tally Down
   Last updated: 5/23/2024
 */
+// Made with https://chat.openai.com/chat
 
 const db = require('./db');
 
+// Function initializes the database
 const initDatabase = () => {
     const createDatabaseQuery = 'CREATE DATABASE IF NOT EXISTS mydatabase';
     const useDatabaseQuery = 'USE mydatabase';

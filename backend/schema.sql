@@ -4,7 +4,7 @@
   Final Project App - Tally Down
   Last updated: 5/23/2024
 */
-
+/* Made with https://chat.openai.com/chat */
 /* Used to manually set up the database schema when a future database instance is created */
 
 CREATE DATABASE mydatabase;

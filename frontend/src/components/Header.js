@@ -5,6 +5,7 @@
   Last updated: 6/3/2024
 */
 // HeaderHome, HeaderTimer, HeaderInfo images: https://iconmonstr.com/
+// Sunwatch https://icons8.com/preloaders/en/circular/sun-watch/ 
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -39,4 +40,3 @@ export default function AppHeader() {
     </header>
   );
 }
-  

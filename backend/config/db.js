@@ -4,6 +4,7 @@
   Final Project App - Tally Down
   Last updated: 5/23/2024
 */
+// Made with https://chat.openai.com/chat
 // File connects to MySQL
 
 const mysql = require('mysql2');

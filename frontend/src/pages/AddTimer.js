@@ -2,8 +2,9 @@
   Modified by: Alan Espana
   CS 232 - Capstone II
   Final Project App - Tally Down
-  Last updated: 6/3/2024
+  Last updated: 6/5/2024
 */
+// Javascript https://chat.openai.com/chat
 
 import AppHeader from '../components/Header';
 import AppFooter from '../components/Footer';
@@ -12,6 +13,8 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import downarrowcircle from "../assets/downArrowCircle.png";
 import { calculateEndDate, saveTimersToLocalStorage, getTimersFromLocalStorage } from '../components/timerUtils';
+import TimerReset from "../assets/timerReset.png";
+import TimerGarbage from "../assets/timerGarbage.png";
 
 export default function AddTimer() {
     const [hoursInput, setHoursInput] = useState('');
@@ -34,10 +37,12 @@ export default function AddTimer() {
     const titleInputRef = useRef(null);
     const descriptionInputRef = useRef(null);
 
+    // Saves timers to local storage
     const saveTimersToLocalStorage = (timers) => {
         localStorage.setItem('timers', JSON.stringify(timers));
     };
 
+    // Adds a new timer
     const handleAddTimer = () => {
         const totalSeconds = 
             (parseInt(hoursInput, 10) || 0) * 3600 +
@@ -67,6 +72,8 @@ export default function AddTimer() {
         }
     };
 
+    // Adds default timer from backend (quick timers)
+    // Axios sends HTTP POST request to backend (Express server) for adding timers
     const handleAddDefaultTimer = (endpoint) => {
         axios.post(`http://localhost:5000/${endpoint}`)
             .then(response => {
@@ -80,12 +87,14 @@ export default function AddTimer() {
             });
     };
 
+    // Delete a timer
     const handleDeleteTimer = (id) => {
         const updatedTimers = timers.filter(timer => timer.id !== id);
         setTimers(updatedTimers);
         saveTimersToLocalStorage(updatedTimers);
     };
 
+    // Resets a timer
     const handleResetTimer = (id) => {
         handleDeleteTimer(id);
         setHoursInput('');
@@ -94,12 +103,14 @@ export default function AddTimer() {
         hoursRef.current.focus();
     };
 
+    // Handle key press (Enter) for adding a timer
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             handleAddTimer();
         }
     };
 
+    // Edits timer title
     const handleEditTitle = (id) => {
         const updatedTimers = timers.map(timer => 
             timer.id === id ? { ...timer, title: newTitle } : timer
@@ -110,6 +121,7 @@ export default function AddTimer() {
         setNewTitle('');
     };
 
+    // Edits timer description
     const handleEditDescription = (id) => {
         const updatedTimers = timers.map(timer => 
             timer.id === id ? { ...timer, description: newDescription } : timer
@@ -120,6 +132,7 @@ export default function AddTimer() {
         setNewDescription('');
     };
 
+    // Handles key press (Enter) for editing timer title or description
     const handleEditKeyPress = (e, id, type) => {
         if (e.key === 'Enter') {
             if (type === 'title') {
@@ -130,6 +143,7 @@ export default function AddTimer() {
         }
     };
 
+    // Handles timer updates every second
     useEffect(() => {
         const intervalId = setInterval(() => {
             setTimers(timers => {
@@ -158,6 +172,7 @@ export default function AddTimer() {
         return () => clearInterval(intervalId);
     }, [timers, popupVisible, finishedTimerIds]);
 
+    // Initializes timers on component mount
     useEffect(() => {
         const now = Date.now();
         setTimers(timers => {
@@ -171,6 +186,7 @@ export default function AddTimer() {
         });
     }, []);
 
+    // Function to close the popup
     const handleClosePopup = () => {
         setPopupVisible(false);
     };
@@ -266,11 +282,11 @@ export default function AddTimer() {
                                     timer.description
                                 )}
                             </div>
-                            <div className="timerCell timerActions">
-                                <button onClick={() => {setEditingTitle(timer.id); setNewTitle(timer.title);}}>Edit Title</button>
-                                <button onClick={() => {setEditingDescription(timer.id); setNewDescription(timer.description);}}>Edit Description</button>
-                                <button onClick={() => handleResetTimer(timer.id)}>Reset</button>
-                                <button onClick={() => handleDeleteTimer(timer.id)}>Delete</button>
+                            <div className='timerCell timerActions'>
+                                <button className='actionButton' onClick={() => {setEditingTitle(timer.id); setNewTitle(timer.title);}}>Edit Title</button>
+                                <button className='actionButton' onClick={() => {setEditingDescription(timer.id); setNewDescription(timer.description);}}>Edit Description</button>
+                                <button className='actionIcon' onClick={() => handleResetTimer(timer.id)}><img src={TimerReset} alt="reset img" className="timerReset" /></button>
+                                <button className='actionIcon' onClick={() => handleDeleteTimer(timer.id)}><img src={TimerGarbage} alt="garbage img" className="timerGarbage" /></button>
                             </div>
                         </div>
                     ))}

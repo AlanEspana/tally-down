@@ -4,6 +4,8 @@
   Final Project App - Tally Down
   Last updated: 6/4/2024
 */
+// images: https://iconmonstr.com/
+// google email link: https://stackoverflow.com/questions/6548570/url-to-compose-a-message-in-gmail-with-full-gmail-interface-and-specified-to-b 
 
 import React from 'react';
 import AppHeader from '../components/Header';
