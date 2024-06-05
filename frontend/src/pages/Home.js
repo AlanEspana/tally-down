@@ -24,7 +24,7 @@ export default function Home() {
     const [popupMessage, setPopupMessage] = useState('');
     const [finishedTimerIds, setFinishedTimerIds] = useState(new Set());
 
-    // Handle timer updates every second
+    // Handles timer updates every second
     useEffect(() => {
         const intervalId = setInterval(() => {
             setTimers(timers => {
